@@ -18,4 +18,10 @@ begin
     execute immediate 'drop table ' || i.table_name || ' CASCADE CONSTRAINTS purge';
   end loop;
 end;
+begin
+	for i in (select * from USER_SCHEDULER_JOBS) loop
+		dbms_scheduler.drop_job(job_name => i.JOB_NAME );
+	end loop;
+end;
 
+ 
